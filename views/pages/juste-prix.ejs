@@ -1,0 +1,90 @@
+<%- include('../fragments/head.ejs')%>
+<script>
+        let tentative = [];
+        let n_target = Math.floor((Math.random()*19)+1)
+        console.log(n_target);
+        function reload(){
+            n_target = Math.floor((Math.random()*19)+1)
+            tentative = [];
+            console.log(n_target);
+        }
+        function verification(n){
+            n = parseInt(n);
+            console.log("input = "+n+" : "+n_target+" resultat ? "+(n === n_target));
+            if (n === n_target){
+                alert("Gagné ! en "+(tentative.length+1)+" coup");
+                localStorage.setItem("Partie "+(localStorage.length+1),tentative.length+1);
+                reload();
+            }
+            else {
+                if (n < n_target){
+                    alert("Vous êtes en dessous du juste prix")
+                }
+                else {
+                    alert("Vous êtes au dessus du juste prix")
+                }
+                tentative[tentative.length] = n;
+            }
+            affichage();
+        }
+        function affichage(){
+            const div_tentative = document.getElementById('tentative');
+            while (div_tentative.firstChild){
+                div_tentative.firstChild.remove();
+            }
+            const p1 = document.createElement('p');
+            p1.appendChild(document.createTextNode("Tentatives"));
+            div_tentative.appendChild(p1);
+            const div_parties = document.getElementById('parties');
+            while (div_parties.firstChild){
+                div_parties.firstChild.remove();}
+            const p2 = document.createElement('p');
+            p2.appendChild(document.createTextNode("Parties"));
+            div_parties.appendChild(p2);
+            const ul = document.createElement('ul');
+            console.log("nombre de coup : "+tentative.length);
+            for (let i = 0; i < tentative.length; i++) {
+                const li = document.createElement('li');
+                li.appendChild(document.createTextNode(""+tentative[i]));
+                ul.appendChild(li);
+            }
+            div_tentative.appendChild(ul);
+            if (localStorage.length > 0){
+                const table = document.createElement('table').className = "game";
+                const tbody = document.createElement('tbody');
+                for (let i = 0; i < localStorage.length; i++) {
+                    const tr = document.createElement('tr');
+                    const key = localStorage.key(i);
+                    const td = document.createElement('td');
+                    td.appendChild(document.createTextNode(key));
+                    tr.appendChild(td);
+                    const value = localStorage.getItem(key);
+                    const td2 = document.createElement('td');
+                    td2.appendChild(document.createTextNode(value));
+                    tr.appendChild(td2)
+                    tbody.appendChild(tr);
+                }
+                table.appendChild(tbody);
+                div_parties.appendChild(table);
+            }
+        }
+    </script>
+</head>
+<body>
+<%- include('../fragments/navigation.ejs')%>
+<h1>Le juste prix</h1>
+<div id="game" style="display: flex">
+    <div id="game_input">
+        <label for="n">Trouver un nombre entier entre 1 et 20</label>
+        <br>
+        <input id="n" name="n" type="number" min="1" max="20">
+        <br>
+        <button onclick="verification(n.value)">Vérifier</button>
+    </div>
+    <div id="game_tentative" style="margin: 10px"></div>
+    <div id="game_parties" style="margin: 10px"></div>
+    <script>
+        affichage();
+    </script>
+</div>
+<%- include('../fragments/foot.ejs')%>

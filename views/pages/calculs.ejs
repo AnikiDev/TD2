@@ -1,0 +1,88 @@
+<div class="form-container">
+
+    <!-- Affichage erreur si nécessaire -->
+    <% if (error) { %>
+        <p class="error-msg" style="color: darkred; font-weight: bold;">
+            <%= error %>
+        </p>
+    <% } %>
+
+    <form class="form" id="calcul-form" method="POST">
+        <div class="section-form">
+            <label for="programme">Programme</label>
+            <select id="programme" name="programme">
+                <option value="prime">Nombres premiers</option>
+                <option value="monte_carlo">Monte-Carlo (π)</option>
+            </select>
+        </div>
+
+        <div class="section-form">
+            <label for="valeur">
+                <span id="valeur-label">Valeur de calcul</span>
+            </label>
+            <input type="number" id="valeur" name="valeur" max="1000000" required>
+        </div>
+
+        <div class="section-form">
+            <label for="nb_process">Nombre de processus MPI</label>
+            <input type="number" id="nb_process" name="nb_process" max="8" required>
+        </div>
+
+        <input type="submit" class="form-btn" value="Lancer le calcul">
+        <input type="reset" class="form-btn" value="Réinitialiser">
+
+        <!-- Message simulé -->
+        <p id="fake-result" class="fake-result" style="display:none; color: green; font-weight: bold; margin-top: 10px;">
+            Vos nombres ont bien été envoyés.
+        </p>
+    </form>
+</div>
+
+<script>
+    const programmeSelect = document.getElementById('programme');
+    const valeurInput = document.getElementById('valeur');
+    const nbProcessInput = document.getElementById('nb_process');
+    const form = document.getElementById("calcul-form");
+    const fakeResult = document.getElementById("fake-result");
+
+    function updateLimits() {
+        const valeurLabel = document.getElementById('valeur-label');
+
+        if (programmeSelect.value === 'monte_carlo') {
+            valeurInput.setAttribute('min', '1');
+            valeurInput.setAttribute('max', '1000000');
+            valeurLabel.textContent = "Nombre de lancers";
+        } else if (programmeSelect.value === 'prime') {
+            valeurInput.setAttribute('min', '2');
+            valeurInput.setAttribute('max', '1000000');
+            valeurLabel.textContent = "Borne maximale (N)";
+        }
+
+        nbProcessInput.setAttribute('min', '1');
+        nbProcessInput.setAttribute('max', '8');
+
+        if (valeurInput.value !== "") {
+            let val = parseInt(valeurInput.value);
+            let min = parseInt(valeurInput.getAttribute('min'));
+            let max = parseInt(valeurInput.getAttribute('max'));
+            valeurInput.value = Math.min(Math.max(val, min), max);
+        }
+
+        if (nbProcessInput.value !== "") {
+            let proc = parseInt(nbProcessInput.value);
+            nbProcessInput.value = Math.min(Math.max(proc, 1), 8);
+        }
+    }
+
+    programmeSelect.addEventListener('change', updateLimits);
+    updateLimits();
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        fakeResult.style.display = "block";
+    });
+
+    form.addEventListener('reset', function() {
+        fakeResult.style.display = "none";
+    });
+</script>
