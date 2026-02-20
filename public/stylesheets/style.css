@@ -1,8 +1,9 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+header{ background-color: #1f79b9;}
+#game_input {
+    border: #1f79b9 solid 1px;
+    border-radius: 5px;
+    background-color: #1f79b9;
 }
-
-a {
-  color: #00B7FF;
-}
+table{border-spacing: unset}
+td {border: black solid 1px;
+    margin: unset}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Erreur <%= error.status || 500 %></title>
+</head>
+<body>
+<h1>Erreur <%= error.status || 500 %></h1>
+<p><%= message %></p>
+
+<% if (error && error.stack) { %>
+    <pre><%= error.stack %></pre>
+<% } %>
+</body>
+</html>
