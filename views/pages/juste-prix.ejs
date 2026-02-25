@@ -1,21 +1,17 @@
-<h1>Le juste prix</h1>
+﻿<h1>Le juste prix</h1>
 
-<div id="game" style="display: flex; gap: 20px;">
-
-    <!-- Zone de saisie -->
+<div id="game">
     <div id="game_input">
         <label for="proposition">Trouver un nombre entier entre 1 et 20</label><br>
         <input id="proposition" type="number" min="1" max="20"><br>
-        <button id="btnVerifier">Vérifier</button>
+        <button id="btnVerifier" type="button">Vérifier</button>
     </div>
 
-    <!-- Affichage des tentatives -->
     <div id="game_tentative">
         <h3>Tentatives :</h3>
         <ul id="listeTentatives"></ul>
     </div>
 
-    <!-- Tableau de l'historique -->
     <div id="game_parties">
         <h3>Historique :</h3>
         <table>
@@ -28,8 +24,6 @@
             <tbody id="historique"></tbody>
         </table>
     </div>
-
 </div>
 
-<!-- Appel du script juste avant la fin du body -->
-<script src="/static/js/prix.js"></script>
+<script src="/static/js/prix.js" defer></script>

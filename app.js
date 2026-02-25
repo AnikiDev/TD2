@@ -1,6 +1,6 @@
-var createError = require('http-errors');
+﻿var createError = require('http-errors');
 var express = require('express');
-const expressLayouts = require("express-ejs-layouts");
+const expressLayouts = require('express-ejs-layouts');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -16,15 +16,9 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-/* IMPORTANT : layouts */
+/* Layouts */
 app.use(expressLayouts);
-
-/* chemin du layout (sans extension) */
 app.set('layout', 'layouts/main');
-
-/* OPTIONNEL MAIS RECOMMANDÉ */
-app.set("layout extractScripts", true);
-app.set("layout extractStyles", true);
 
 /* ======================
    MIDDLEWARES
@@ -39,8 +33,8 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 
 /* rendre variables globales */
 app.use((req, res, next) => {
-    res.locals.currentPage = req.path.replace("/", "") || "index";
-    res.locals.title = "Core Lab"; // évite title undefined
+    res.locals.currentPage = req.path.replace('/', '') || 'index';
+    res.locals.title = 'Core Lab';
     next();
 });
 
