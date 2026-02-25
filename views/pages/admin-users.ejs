@@ -1,0 +1,30 @@
+﻿<div class="auth-wrapper">
+    <div class="auth-card admin-card">
+        <h1>Liste des utilisateurs</h1>
+
+        <% if (!users || users.length === 0) { %>
+            <p>Aucun utilisateur enregistré.</p>
+        <% } else { %>
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>Nom utilisateur</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Créé le</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach(function(u) { %>
+                        <tr>
+                            <td><%= u.username %></td>
+                            <td><%= u.email %></td>
+                            <td><%= u.isAdmin ? 'Admin' : 'Utilisateur' %></td>
+                            <td><%= new Date(u.createdAt).toLocaleString('fr-FR') %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+</div>

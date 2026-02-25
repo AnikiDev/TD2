@@ -103,10 +103,106 @@ nav {
     transition: all 0.2s ease-out;
 }
 
+.nav-user {
+    color: #fff;
+    font-weight: 700;
+}
+
 .nav-btn li a:hover {
     transform: translateY(-5px);
     border-radius: 30px;
     background-color: #0096c7;
+}
+
+.auth-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 30px 12px;
+}
+
+.auth-card {
+    background: var(--bg-form);
+    color: #fff;
+    width: 100%;
+    max-width: 520px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0 16px;
+}
+
+.auth-tab {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+    background: #e7e7e7;
+    color: #1e1e1e;
+    font-weight: 700;
+}
+
+.auth-tab.is-active {
+    background: #00a1d9;
+    color: #fff;
+}
+
+.auth-form {
+    display: none;
+    flex-direction: column;
+}
+
+.auth-form.is-visible {
+    display: flex;
+}
+
+.auth-form input {
+    margin: 5px 0;
+    height: 34px;
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 5px 8px;
+}
+
+.auth-form .form-btn {
+    margin-top: 8px;
+    height: 40px;
+    border: none;
+    border-radius: 6px;
+    background: var(--form-submit-bg);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.admin-card {
+    max-width: 900px;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    color: #1f1f1f;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.users-table th,
+.users-table td {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    text-align: left;
+}
+
+.users-table th {
+    background: #f1f1f1;
 }
 
 .presentation {

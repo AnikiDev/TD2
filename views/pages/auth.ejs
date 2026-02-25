@@ -1,0 +1,74 @@
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h1>Connexion / Inscription</h1>
+
+        <% if (error) { %>
+            <p class="error-msg"><%= error %></p>
+        <% } %>
+
+        <% if (success) { %>
+            <p class="success-msg"><%= success %></p>
+        <% } %>
+
+        <div class="auth-tabs">
+            <button id="tab-login" class="auth-tab <%= activeTab === 'login' ? 'is-active' : '' %>" type="button">Connexion</button>
+            <button id="tab-register" class="auth-tab <%= activeTab === 'register' ? 'is-active' : '' %>" type="button">Inscription</button>
+        </div>
+
+        <form id="login-form" class="auth-form <%= activeTab === 'login' ? 'is-visible' : '' %>" action="/auth/login" method="POST">
+            <div class="section-form">
+                <label for="identifier">Email ou nom utilisateur</label>
+                <input id="identifier" name="identifier" type="text" value="<%= loginData.identifier %>" required>
+            </div>
+            <div class="section-form">
+                <label for="login-password">Mot de passe</label>
+                <input id="login-password" name="password" type="password" required>
+            </div>
+            <input class="form-btn" type="submit" value="Se connecter">
+        </form>
+
+        <form id="register-form" class="auth-form <%= activeTab === 'register' ? 'is-visible' : '' %>" action="/auth/register" method="POST">
+            <div class="section-form">
+                <label for="username">Nom utilisateur</label>
+                <input id="username" name="username" type="text" value="<%= registerData.username %>" minlength="3" required>
+            </div>
+            <div class="section-form">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" value="<%= registerData.email %>" required>
+            </div>
+            <div class="section-form">
+                <label for="register-password">Mot de passe</label>
+                <input id="register-password" name="password" type="password" minlength="6" required>
+            </div>
+            <div class="section-form">
+                <label for="confirmPassword">Confirmer le mot de passe</label>
+                <input id="confirmPassword" name="confirmPassword" type="password" minlength="6" required>
+            </div>
+            <input class="form-btn" type="submit" value="S'inscrire">
+        </form>
+    </div>
+</div>
+
+<script>
+    (function() {
+        var tabLogin = document.getElementById('tab-login');
+        var tabRegister = document.getElementById('tab-register');
+        var loginForm = document.getElementById('login-form');
+        var registerForm = document.getElementById('register-form');
+
+        function activate(tab) {
+            var loginActive = tab === 'login';
+            tabLogin.classList.toggle('is-active', loginActive);
+            tabRegister.classList.toggle('is-active', !loginActive);
+            loginForm.classList.toggle('is-visible', loginActive);
+            registerForm.classList.toggle('is-visible', !loginActive);
+        }
+
+        tabLogin.addEventListener('click', function() {
+            activate('login');
+        });
+        tabRegister.addEventListener('click', function() {
+            activate('register');
+        });
+    })();
+</script>

@@ -6,5 +6,16 @@
         <li><a href="/">Accueil</a></li>
         <li><a href="/calcul">Calculs</a></li>
         <li><a href="/juste-prix">Juste Prix</a></li>
+
+        <% if (user) { %>
+            <% if (user.isAdmin) { %>
+                <li><a href="/admin/users">Utilisateurs</a></li>
+            <% } %>
+
+            <li><span class="nav-user">Bonjour, <%= user.username %></span></li>
+            <li><a href="/auth/logout">Déconnexion</a></li>
+        <% } else { %>
+            <li><a href="/auth">Connexion / Inscription</a></li>
+        <% } %>
     </ul>
 </nav>
